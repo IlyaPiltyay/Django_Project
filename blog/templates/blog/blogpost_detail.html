@@ -1,0 +1,17 @@
+<!-- blog/templates/blog/blogpost_detail.html -->
+{% extends "blog/base.html" %}
+
+{% block title %}{{ blog_post.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ blog_post.title }}</h1>
+{% if blog_post.preview_image %}
+    <img src="{{ blog_post.preview_image.url }}" alt="Preview" class="img-fluid"/>
+{% endif %}
+<p>{{ blog_post.content }}</p>
+<p><strong>Published:</strong> {{ blog_post.is_published }}</p>
+<p><strong>Created on:</strong> {{ blog_post.created_at }}</p>
+<p><strong>Views:</strong> {{ blog_post.view_count }}</p>
+<a class="btn btn-primary" href="{% url 'blogpost_update' blog_post.pk %}">Edit</a>
+<a class="btn btn-secondary" href="{% url 'blogpost_list' %}">Back to list</a>
+{% endblock %}

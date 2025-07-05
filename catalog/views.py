@@ -1,35 +1,48 @@
+from django.views.generic import ListView, DetailView
+
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import TemplateView
 
 from catalog.models import Product
 
 
 # Create your views here.
 
-def home(request):
-    return render(request, 'catalog/home.html')
+class HomeView(TemplateView):
+    template_name = 'catalog/home.html'
 
 
-def contacts(request):
-    return render(request, 'catalog/contacts.html')
+class ContactsView(TemplateView):
+    template_name = 'catalog/contacts.html'
 
 
-def catalog(request):
-    products = Product.objects.all()
-    products_by_category = {}
+class CatalogView(ListView):
+    template_name = 'catalog/catalog.html'
+    context_object_name = 'products'  # имя, с которым мы будем ссылаться на продукты в шаблоне
 
-    for product in products:
-        category = product.category.name
-        if category not in products_by_category:
-            products_by_category[category] = []
-        products_by_category[category].append(product)
+    def get_queryset(self):
+        return Product.objects.all()  # Возвращает все продукты
 
-    context = {"products_by_category": products_by_category}
-    return render(request, 'catalog/catalog.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        products = context['products']
+        products_by_category = {}
+
+        for product in products:
+            category = product.category.name
+            if category not in products_by_category:
+                products_by_category[category] = []
+            products_by_category[category].append(product)
+
+        context['products_by_category'] = products_by_category
+        return context
 
 
-def product_detail(request, id):
-    product = get_object_or_404(Product, id=id)  # Получаем товар по ID
-    context = {
-        "product": product,  # Передаем продукт в контекст
-    }
-    return render(request, 'catalog/product_detail.html', context)
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'catalog/product_detail.html'
+    context_object_name = 'product'  # Вы сможете ссылаться на продукт в шаблоне через 'product'
+
+    def get_object(self):
+        # Вызываем get_object из родительского класса, чтобы получить продукт по ID
+        return get_object_or_404(Product, id=self.kwargs['id'])

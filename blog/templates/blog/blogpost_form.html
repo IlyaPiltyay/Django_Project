@@ -1,0 +1,14 @@
+<!-- blog/templates/blog/blogpost_form.html -->
+{% extends "blog/base.html" %}
+
+{% block title %}{% if object %}Edit{% else %}Create{% endif %} Blog Post{% endblock %}
+
+{% block content %}
+<h1>{% if object %}Edit{% else %}Create{% endif %} Blog Post</h1>
+<form method="post" enctype="multipart/form-data" class="bg-light p-4 rounded">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Save</button>
+</form>
+<a class="btn btn-secondary" href="{% url 'blogpost_list' %}">Cancel</a>
+{% endblock %}

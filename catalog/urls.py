@@ -1,15 +1,14 @@
 from django.urls import path
 from . import views
-from .views import catalog
+from .views import HomeView, ContactsView, CatalogView, ProductDetailView
 
 app_name = 'catalog'  # устанавливаем пространство имен для приложения
 
 urlpatterns = [
-    path('home/', views.home, name='home'),  # URL для главной страницы
-    path('contacts/', views.contacts, name='contacts'),  # URL для страницы контактов
-    path('catalog/', views.catalog, name='catalog'), # URL для страницы товаров
-    path('product/<int:id>/', views.product_detail, name='product_detail'), # URL для страницы описания
-
+    path('', HomeView.as_view(), name='home'),
+    path('contacts/', ContactsView.as_view(), name='contacts'),
+    path('catalog/', CatalogView.as_view(), name='catalog'),
+    path('product/<int:id>/', ProductDetailView.as_view(), name='product_detail'),
 ]
 #  cd C:\Уроки\Django_Project
 # python manage.py runserver
