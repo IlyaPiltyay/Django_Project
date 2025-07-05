@@ -20,6 +20,5 @@ class BlogPost(models.Model):
         self.view_count += 1
         self.save()
 
-
     def __str__(self):
         return self.title

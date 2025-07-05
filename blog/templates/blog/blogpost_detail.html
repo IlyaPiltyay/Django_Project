@@ -12,6 +12,6 @@
 <p><strong>Published:</strong> {{ blog_post.is_published }}</p>
 <p><strong>Created on:</strong> {{ blog_post.created_at }}</p>
 <p><strong>Views:</strong> {{ blog_post.view_count }}</p>
-<a class="btn btn-primary" href="{% url 'blogpost_update' blog_post.pk %}">Edit</a>
-<a class="btn btn-secondary" href="{% url 'blogpost_list' %}">Back to list</a>
+<a class="btn btn-primary" href="{% url 'blogpost_update' blog_post.pk %}">Редактировать</a>
+<a class="btn btn-secondary" href="{% url 'blogpost_list' %}">Вернуться к списку</a>
 {% endblock %}

@@ -4,11 +4,11 @@
 {% block title %}Delete Blog Post{% endblock %}
 
 {% block content %}
-<h1>Delete Blog Post</h1>
-<p>Are you sure you want to delete "{{ object.title }}"?</p>
+<h1>Удалить пост</h1>
+<p>Вы действительно хотите удалить пост "{{ object.title }}"?</p>
 <form method="post">
     {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Confirm</button>
+    <button type="submit" class="btn btn-danger">Подтвердить</button>
 </form>
-<a class="btn btn-secondary" href="{% url 'blogpost_list' %}">Cancel</a>
+<a class="btn btn-secondary" href="{% url 'blogpost_list' %}">Отмена</a>
 {% endblock %}

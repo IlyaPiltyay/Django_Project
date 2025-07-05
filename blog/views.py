@@ -1,6 +1,9 @@
+from audioop import reverse
+
 from django.shortcuts import render
 
 # Create your views here.
+from django.urls import reverse
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -21,6 +24,9 @@ class BlogPostListView(ListView):
     context_object_name = 'blog_posts'
     success_url = '/blog/'
 
+    def get_queryset(self):
+        return BlogPost.objects.filter(is_published=True)
+
 
 class BlogPostDetailView(DetailView):
     model = BlogPost
@@ -39,6 +45,9 @@ class BlogPostUpdateView(UpdateView):
     template_name = 'blog/blogpost_form.html'
     fields = ['title', 'content', 'preview_image', 'is_published']
     success_url = '/blog/'
+
+    def get_success_url(self):
+        return reverse('blogpost_detail', kwargs={'pk': self.object.pk})
 
 
 class BlogPostDeleteView(DeleteView):

@@ -8,7 +8,7 @@
 <form method="post" enctype="multipart/form-data" class="bg-light p-4 rounded">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Save</button>
+    <button type="submit" class="btn btn-success">Сохранить</button>
 </form>
-<a class="btn btn-secondary" href="{% url 'blogpost_list' %}">Cancel</a>
+<a class="btn btn-secondary" href="{% url 'blogpost_list' %}">Отмена</a>
 {% endblock %}
