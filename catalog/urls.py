@@ -1,7 +1,8 @@
 from django.urls import path
-from . import views
-from .views import HomeView, ContactsView, CatalogView, ProductListView, ProductCreateView, \
-    ProductUpdateView, ProductDeleteView, ProductDetailView
+
+from .views import (CatalogView, ContactsView, HomeView, ProductCreateView,
+                    ProductDeleteView, ProductDetailView, ProductListView,
+                    ProductUpdateView)
 
 app_name = 'catalog'  # устанавливаем пространство имен для приложения
 

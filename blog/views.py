@@ -1,14 +1,9 @@
-from audioop import reverse
-
-from django.shortcuts import render
-
 # Create your views here.
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView)
 
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
 from .models import BlogPost
-from django import forms
 
 
 class BlogPostCreateView(CreateView):
@@ -54,4 +49,3 @@ class BlogPostDeleteView(DeleteView):
     model = BlogPost
     template_name = 'blog/blogpost_confirm_delete.html'
     success_url = reverse_lazy('blogpost_list')
-

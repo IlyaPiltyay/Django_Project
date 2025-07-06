@@ -552,3 +552,19 @@ files = [
 lock-version = "2.1"
 python-versions = ">=3.12"
 content-hash = "72a82142f442146bf0df1f4ed0b8311b1cdc7d2f9309e83e15337a18caf4bc01"
+
+[tool.black]
+line-length = 119
+exclude = '''
+/(
+    .git
+    |__pycache__
+    |.venv
+    |env
+    |build
+    |dist
+)/
+'''
+
+[tool.isort]
+line_length = 119

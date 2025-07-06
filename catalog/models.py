@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # Create your models here.
 
 class Category(models.Model):
@@ -31,7 +30,3 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
-
-#
-#prduct1 = Product.objects.create(name='nissan', description='auto', category=category1,price=123)
-# category1 = Category.objects.create(name='Auto', description='car')

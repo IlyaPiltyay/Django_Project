@@ -1,11 +1,9 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  TemplateView, UpdateView)
 
 from catalog.forms import ProductForm
-from django.views.generic import TemplateView
-
 from catalog.models import Product
-
 
 # Create your views here.
 
