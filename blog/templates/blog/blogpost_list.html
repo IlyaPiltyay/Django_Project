@@ -10,8 +10,8 @@
         <li class="list-group-item d-flex justify-content-between align-items-center">
             <a href="{% url 'blogpost_detail' post.pk %}">{{ post.title }}</a>
             <span>
-                <a class="btn btn-warning btn-sm" href="{% url 'blogpost_update' post.pk %}">Редактировать</a>
-                <a class="btn btn-danger btn-sm" href="{% url 'blogpost_delete' post.pk %}">Отменить</a>
+                <a class="btn btn-secondary btn-sm" href="{% url 'blogpost_update' post.pk %}">Редактировать</a>
+                <a class="btn btn-danger btn-sm" href="{% url 'blogpost_delete' post.pk %}">Удалить</a>
             </span>
         </li>
     {% endfor %}

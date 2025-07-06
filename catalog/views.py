@@ -1,6 +1,7 @@
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from django.shortcuts import render, get_object_or_404
+from catalog.forms import ProductForm
 from django.views.generic import TemplateView
 
 from catalog.models import Product
@@ -18,7 +19,7 @@ class ContactsView(TemplateView):
 
 class CatalogView(ListView):
     template_name = 'catalog/catalog.html'
-    context_object_name = 'products'  # имя, с которым мы будем ссылаться на продукты в шаблоне
+    context_object_name = 'products'
 
     def get_queryset(self):
         return Product.objects.all()  # Возвращает все продукты
@@ -38,11 +39,34 @@ class CatalogView(ListView):
         return context
 
 
+class ProductListView(ListView):
+    model = Product
+    template_name = 'product_list.html'
+    context_object_name = 'products'
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'catalog/product_form.html'
+    success_url = reverse_lazy('catalog:product_list')
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'product_form.html'
+    success_url = reverse_lazy('product_list')
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    template_name = 'catalog/product_confirm_delete.html'
+    context_object_name = 'product'
+    success_url = reverse_lazy('catalog:product_list')
+
+
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'catalog/product_detail.html'
-    context_object_name = 'product'  # Вы сможете ссылаться на продукт в шаблоне через 'product'
-
-    def get_object(self):
-        # Вызываем get_object из родительского класса, чтобы получить продукт по ID
-        return get_object_or_404(Product, id=self.kwargs['id'])
+    context_object_name = 'product'
