@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Удалить {{ product.name }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-danger">Вы уверены, что хотите удалить "{{ product.name }}"?</h1>
+        <div class="alert alert-warning" role="alert">
+            После удаления ваш продукт не может быть восстановлен!
+        </div>
+        <form method="post" class="mb-4">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Удалить</button>
+            <a href="{% url 'catalog:product_list' %}" class="btn btn-secondary">Отменить</a>
+        </form>
+    </div>
+</body>
+</html>
