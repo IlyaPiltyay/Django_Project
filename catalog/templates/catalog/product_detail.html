@@ -23,7 +23,7 @@
     <p>{{ product.description }}</p>
     <button type="button" class="btn btn-lg btn-primary">Добавить в корзину</button>
     <a href="{% url 'catalog:catalog' %}" class="btn btn-secondary">Назад в каталог</a>
-</div>
+    <a href="{% url 'catalog:product_update' product.id %}" class="btn btn-secondary">Редактировать</a></div>
 
 <footer class="pt-4 my-md-5 pt-md-5 border-top">
     <div class="row">

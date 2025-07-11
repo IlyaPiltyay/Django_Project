@@ -39,7 +39,7 @@ class CatalogView(ListView):
 
 class ProductListView(ListView):
     model = Product
-    template_name = 'product_list.html'
+    template_name = 'catalog/product_list.html'
     context_object_name = 'products'
 
 
@@ -53,8 +53,8 @@ class ProductCreateView(CreateView):
 class ProductUpdateView(UpdateView):
     model = Product
     form_class = ProductForm
-    template_name = 'product_form.html'
-    success_url = reverse_lazy('product_list')
+    template_name = 'catalog/product_form.html'
+    success_url = reverse_lazy('catalog:product_list')
 
 
 class ProductDeleteView(DeleteView):
