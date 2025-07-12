@@ -1,22 +1,33 @@
-<!-- product_list.html -->
+{% extends 'catalog/base.html' %}
+{% load static %}
 
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Список продуктов</title>
-</head>
-<body>
-    <h1>Список продуктов</h1>
-    <a href="{% url 'catalog:product_create' %}">Добавить новый продукт</a>
-    <ul>
-        {% for product in products %}
-            <li>
-                <a href="{% url 'catalog:product_detail' product.pk %}">{{ product.name }}</a>
-                <a href="{% url 'catalog:product_update' product.pk %}">Редактировать</a>
-                <a href="{% url 'catalog:product_delete' product.pk %}">Удалить</a>
-            </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+
+{% block content %}
+<div class="container">
+        <h1 class="text-center my-4">Список продуктов</h1>
+        <a href="{% url 'catalog:product_create' %}" class="btn btn-primary mb-3">Добавить новый продукт</a>
+        <div class="row">
+            {% for product in products %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card shadow-sm border-light"> <!-- Добавляем тень для карточек -->
+                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default-image.png' %}{% endif %}" class="card-img-top" alt="{{ product.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">Здесь может быть краткое описание продукта.</p> <!-- Место для описания продукта -->
+                            <div class="d-flex justify-content-between">
+                                <a href="{% url 'catalog:product_update' product.id %}" class="btn btn-warning btn-sm">Редактировать</a>
+                                <a href="{% url 'catalog:product_delete' product.id %}" class="btn btn-danger btn-sm">Удалить</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-info" role="alert">Нет доступных продуктов.</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}

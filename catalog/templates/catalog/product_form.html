@@ -1,49 +1,47 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ form.instance.pk|yesno:'Редактировать,Добавить' }} продукт</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+
+{% block content %}
     <div class="container mt-4">
         <h1>{{ form.instance.pk|yesno:'Редактировать,Добавить' }} продукт</h1>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.non_field_errors }}  <!-- Отображение ошибок вне полей формы -->
+
             <div class="form-group">
                 {{ form.name.label }}
                 {{ form.name }}  <!-- Название продукта -->
                 {{ form.name.errors }}  <!-- Ошибки конкретного поля -->
             </div>
+
             <div class="form-group">
                 {{ form.description.label }}
                 {{ form.description }}  <!-- Описание продукта -->
                 {{ form.description.errors }}  <!-- Ошибки конкретного поля -->
             </div>
+
             <div class="form-group">
                 {{ form.price.label }}
                 {{ form.price }}  <!-- Цена продукта -->
                 {{ form.price.errors }}  <!-- Ошибки конкретного поля -->
             </div>
+
             <div class="form-group">
                 {{ form.image.label }}
                 {{ form.image }}  <!-- Изображение продукта -->
                 {{ form.image.errors }}  <!-- Ошибки конкретного поля -->
             </div>
+
             <div class="form-group">
                 {{ form.category.label }}  <!-- Отображение метки для поля категории -->
                 {{ form.category }}  <!-- Поле выбора категории -->
                 {{ form.category.errors }}  <!-- Ошибки конкретного поля -->
             </div>
 
-            <button type="submit" class="btn btn-success mt-3">Создать продукт</button>
+            <button type="submit" class="btn btn-success mt-3">{{ form.instance.pk|yesno:'Сохранить изменения,Создать продукт' }}</button>
             <a href="{% url 'catalog:catalog' %}" class="btn btn-secondary mt-3">Назад к списку</a>
         </form>
         <a href="{% url 'catalog:product_list' %}" class="btn btn-secondary">Отмена</a>
     </div>
-</body>
-</html>
-
-
-
+{% endblock %}

@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Удалить {{ product.name }}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
+{% extends 'catalog/base.html' %}
+
+{% load static %}
+
+{% block title %}Удалить {{ product.name }}{% endblock %}
+
+{% block content %}
     <div class="container mt-4">
         <h1 class="text-danger">Вы уверены, что хотите удалить "{{ product.name }}"?</h1>
         <div class="alert alert-warning" role="alert">
@@ -17,5 +16,4 @@
             <a href="{% url 'catalog:product_list' %}" class="btn btn-secondary">Отменить</a>
         </form>
     </div>
-</body>
-</html>
+{% endblock %}

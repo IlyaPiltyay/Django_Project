@@ -24,4 +24,5 @@ urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('catalog/', include('catalog.urls')),  # Подключаем URL-ы для приложения catalog
                   path('blog/', include('blog.urls')),  # Подключаем URL-ы для приложения blog
+                  path('users/', include('users.urls')),  # Подключаем URL-ы для приложения Users
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
