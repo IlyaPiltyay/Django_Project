@@ -25,7 +25,7 @@
     <ul class="navbar-nav ml-auto">
         {% if user.is_authenticated %}
         <li class="nav-item">
-            <span class="nav-link">User, {{ user.username }}!</span>  <!-- Отображение имени пользователя -->
+            <span class="nav-link">{{ user.email }}!</span>  <!-- Отображение имени пользователя -->
         </li>
         <li class="nav-item">
             <form method="post" action="{% url 'users:logout' %}" style="display: inline;">

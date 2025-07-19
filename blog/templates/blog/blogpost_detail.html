@@ -12,6 +12,8 @@
 <p><strong>Published:</strong> {{ blog_post.is_published }}</p>
 <p><strong>Created on:</strong> {{ blog_post.created_at }}</p>
 <p><strong>Views:</strong> {{ blog_post.view_count }}</p>
+{% if user.is_authenticated %}
 <a class="btn btn-primary" href="{% url 'blog:blogpost_update' blog_post.pk %}">Редактировать</a>
+{% endif %}
 <a class="btn btn-secondary" href="{% url 'blog:blogpost_list' %}">Вернуться к списку</a>
 {% endblock %}

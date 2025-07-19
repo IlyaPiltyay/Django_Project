@@ -20,7 +20,9 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link" href="{% url 'blog:blogpost_list' %}">Главная</a></li>
+            {% if user.is_authenticated %}
             <li class="nav-item"><a class="nav-link" href="{% url 'blog:blogpost_create' %}">Новый пост</a></li>
+            {% endif %}
         </ul>
     </div>
 </nav>

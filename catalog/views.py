@@ -9,11 +9,11 @@ from catalog.models import Product
 
 # Create your views here.
 
-class HomeView(LoginRequiredMixin, TemplateView):
+class HomeView(TemplateView):
     template_name = 'catalog/home.html'
 
 
-class ContactsView(LoginRequiredMixin, TemplateView):
+class ContactsView(TemplateView):
     template_name = 'catalog/contacts.html'
 
 
