@@ -10,4 +10,4 @@ class CustomUser(AbstractUser):
     country = models.CharField(max_length=50, null=True, blank=True)  # Поле для страны
 
     USERNAME_FIELD = 'email'  # Указание, что электронная почта является именем пользователя
-    REQUIRED_FIELDS = ['username']  # Поля, обязательные для заполнения, при создании пользователя
+    REQUIRED_FIELDS = []

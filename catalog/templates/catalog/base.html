@@ -35,10 +35,10 @@
         </li>
         {% else %}
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'catalog:register' %}">Регистрация</a>
+            <a class="nav-link" href="{% url 'users:register' %}">Регистрация</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'catalog:login' %}">Вход</a>
+            <a class="nav-link" href="{% url 'users:login' %}">Вход</a>
         </li>
         {% endif %}
     </ul>

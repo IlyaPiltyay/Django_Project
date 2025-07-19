@@ -1,10 +1,8 @@
 from django.contrib.auth.views import LoginView
-
 from django.shortcuts import render, redirect
-
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
-from django.views import View
+from django.views.generic import FormView
 
 from .forms import CustomUserCreationForm
 from django.conf import settings
@@ -12,27 +10,26 @@ from django.conf import settings
 
 # Create your views here.
 
-class RegisterView(View):
+class RegisterView(FormView):
     form_class = CustomUserCreationForm
     template_name = 'users/register.html'
     success_url = reverse_lazy('users:login')
 
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
+    def form_valid(self, form):
+        user = form.save()
 
-    def post(self, request):
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
+        subject = 'Добро пожаловать на наш сайт!'
+        message = f'Уважаемый пользователь,\n\nСпасибо за регистрацию на нашем сайте!'
+        send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email])
 
-            # Отправка приветственного письма
-            subject = 'Добро пожаловать на наш сайт!'
-            message = f'Уважаемый {user.username},\n\nСпасибо за регистрацию на нашем сайте!'
-            send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email])
+        return super().form_valid(form)
 
-            return redirect('users:login')  # Перенаправление на страницу входа
-        return render(request, 'users/register.html', {'form': form})
+    def form_invalid(self, form):
+        # Обработка ошибок формы
+        if "unique" in str(form.errors.get('email', '')):
+            form.add_error('email', 'Пользователь с таким email уже существует.')
+
+        return super().form_invalid(form)
 
 
 class CustomLoginView(LoginView):
