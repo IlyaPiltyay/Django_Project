@@ -104,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 AUTH_USER_MODEL = 'users.CustomUser'
-LOGIN_URL = '/catalog/register/'
+LOGIN_URL = '/users/login/'
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 

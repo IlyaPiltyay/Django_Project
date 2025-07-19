@@ -42,7 +42,7 @@ class BlogPostUpdateView(UpdateView):
     success_url = '/blog/'
 
     def get_success_url(self):
-        return reverse('blogpost_detail', kwargs={'pk': self.object.pk})
+        return reverse('blog:blogpost_detail', kwargs={'pk': self.object.pk})
 
 
 class BlogPostDeleteView(DeleteView):
