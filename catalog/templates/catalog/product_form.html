@@ -39,6 +39,16 @@
                 {{ form.category.errors }}  <!-- Ошибки конкретного поля -->
             </div>
 
+            {% if perms.product.can_unpublish_product %}
+            <div class="form-group">
+                {{ form.is_published.label }}  <!-- Отображение метки для поля категории -->
+                {{ form.is_published }}  <!-- Поле выбора категории -->
+                {{ form.is_published.errors }}  <!-- Ошибки конкретного поля -->
+            </div>
+            {% endif %}
+
+
+
             <button type="submit" class="btn btn-success mt-3">{{ form.instance.pk|yesno:'Сохранить изменения,Создать продукт' }}</button>
             <a href="{% url 'catalog:catalog' %}" class="btn btn-secondary mt-3">Назад к списку</a>
         </form>

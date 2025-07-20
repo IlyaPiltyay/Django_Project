@@ -1,5 +1,5 @@
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render, redirect
+
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.views.generic import FormView
@@ -23,13 +23,6 @@ class RegisterView(FormView):
         send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email])
 
         return super().form_valid(form)
-
-    def form_invalid(self, form):
-        # Обработка ошибок формы
-        if "unique" in str(form.errors.get('email', '')):
-            form.add_error('email', 'Пользователь с таким email уже существует.')
-
-        return super().form_invalid(form)
 
 
 class CustomLoginView(LoginView):

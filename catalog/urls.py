@@ -1,7 +1,4 @@
 from django.urls import path
-from django.contrib.auth import views as auth_views
-
-from users.views import RegisterView
 from .views import (CatalogView, ContactsView, HomeView, ProductCreateView,
                     ProductDeleteView, ProductDetailView, ProductListView,
                     ProductUpdateView)
@@ -9,7 +6,7 @@ from .views import (CatalogView, ContactsView, HomeView, ProductCreateView,
 app_name = 'catalog'  # устанавливаем пространство имен для приложения
 
 urlpatterns = [
-    path('', HomeView.as_view(), name='home'),
+    path('home/', HomeView.as_view(), name='home'),
     path('contacts/', ContactsView.as_view(), name='contacts'),
     path('catalog/', CatalogView.as_view(), name='catalog'),
     path('products/', ProductListView.as_view(), name='product_list'),

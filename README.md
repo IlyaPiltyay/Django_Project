@@ -15,6 +15,4 @@
 1. **Клонировать репозиторий:**
    ```bash
    git clone https://github.com/IlyaPiltyay/Django_Project.git
-   cd C:\Уроки\Django_Project
-   cd \Django_Project
-   python manage.py runserver
+   

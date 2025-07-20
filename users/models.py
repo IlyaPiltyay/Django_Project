@@ -4,6 +4,7 @@ from django.db import models
 
 # Create your models here.
 class CustomUser(AbstractUser):
+    username = None
     email = models.EmailField(unique=True)  # Поле электронной почты как поле для авторизации
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)  # Поле для аватара
     phone_number = models.CharField(max_length=15, null=True, blank=True)  # Поле для номера телефона
