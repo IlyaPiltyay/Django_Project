@@ -2,18 +2,18 @@
 
 {% load static %}
 
-{% block title %}Удалить {{ product.name }}{% endblock %}
+{% block title %}Удалить {{ products.name }}{% endblock %}
 
 {% block content %}
-    <div class="container mt-4">
-        <h1 class="text-danger">Вы уверены, что хотите удалить "{{ product.name }}"?</h1>
-        <div class="alert alert-warning" role="alert">
-            После удаления ваш продукт не может быть восстановлен!
+    <div class="container mt-5">
+        <h1 class="text-danger text-center">Вы уверены, что хотите удалить "{{ products.name }}"?</h1>
+        <div class="alert alert-warning text-center" role="alert">
+            <strong>Внимание!</strong> После удаления ваш продукт не может быть восстановлен!
         </div>
-        <form method="post" class="mb-4">
+        <form method="post" class="mb-4 text-center">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Удалить</button>
-            <a href="{% url 'catalog:product_list' %}" class="btn btn-secondary">Отменить</a>
+            <button type="submit" class="btn btn-danger btn-lg me-2">Удалить</button>
+            <a href="{% url 'catalog:catalog' %}" class="btn btn-secondary btn-lg">Отменить</a>
         </form>
     </div>
 {% endblock %}

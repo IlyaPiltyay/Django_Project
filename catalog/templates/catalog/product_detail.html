@@ -7,14 +7,17 @@
 
 {% block content %}
 <div class="container">
-    <h1 class="mt-4">{{ product.name }}</h1>
-    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default-image.png' %}{% endif %}" alt="{{ product.name }}" class="img-fluid mb-4">
-    <p class="lead">Цена: {{ product.price }} руб.</p>
-    <p>{{ product.description }}</p>
-    <button type="button" class="btn btn-lg btn-primary">Добавить в корзину</button>
-    <a href="{% url 'catalog:catalog' %}" class="btn btn-secondary">Назад в каталог</a>
-    {% if perms.product.can_unpublish_product %}
-    <a href="{% url 'catalog:product_update' product.id %}" class="btn btn-secondary">Редактировать</a>
-    {% endif %}
+    <div class="card mb-4" style="max-width: 400px; margin: left;">
+
+    <h1 class="mt-4">{{ products.name }}</h1>
+    <img src="{% if products.image %}{{ products.image.url }}{% else %}{% static 'images/default-image.png' %}{% endif %}" alt="{{ products.name }}" class="img-fluid mb-4">
+    <p class="lead">Цена: {{ products.price }} руб.</p>
+    <p>{{ products.description }}</p>
+    <button type="button" class="btn btn-lg btn-primary mb-2">Добавить в корзину</button>
+    <a href="{% url 'catalog:catalog' %}" class="btn btn-secondary mb-2">Назад в каталог</a>
+        {% if perms.products.can_unpublish_product %}
+    <a href="{% url 'catalog:product_update' products.id %}" class="btn btn-secondary">Редактировать</a>
+        {% endif %}
+
 </div>
 {% endblock %}

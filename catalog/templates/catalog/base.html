@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .small-img {
-            width: 210px;     /* Фиксированная ширина */
-            height: 230px;    /* Фиксированная высота */
+            width: 210px; /* Фиксированная ширина */
+            height: 230px; /* Фиксированная высота */
             object-fit: cover; /* Сохранение пропорций */
         }
     </style>
@@ -20,8 +20,22 @@
     {% include 'catalog/menu.html' %}
 </div>
 
-<!-- Основной контент -->
+<!-- Блок для отображения сообщений -->
 <div class="container">
+    {% if messages %}
+    <div class="my-3">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Основное содержимое -->
     <ul class="navbar-nav ml-auto">
         {% if user.is_authenticated %}
         <li class="nav-item">
@@ -76,5 +90,9 @@
         </div>
     </div>
 </footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

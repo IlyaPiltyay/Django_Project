@@ -1,7 +1,6 @@
 {% extends 'catalog/base.html' %}
 {% load static %}
 
-
 {% block content %}
     <div class="container mt-4">
         <h1>{{ form.instance.pk|yesno:'Редактировать,Добавить' }} продукт</h1>
@@ -39,17 +38,17 @@
                 {{ form.category.errors }}  <!-- Ошибки конкретного поля -->
             </div>
 
-            {% if perms.product.can_unpublish_product %}
+
             <div class="form-group">
-                {{ form.is_published.label }}  <!-- Отображение метки для поля категории -->
-                {{ form.is_published }}  <!-- Поле выбора категории -->
+                {{ form.is_published.label }}
+                {{ form.is_published }}  <!-- Поле выбора, если есть -->
                 {{ form.is_published.errors }}  <!-- Ошибки конкретного поля -->
             </div>
-            {% endif %}
 
 
-
-            <button type="submit" class="btn btn-success mt-3">{{ form.instance.pk|yesno:'Сохранить изменения,Создать продукт' }}</button>
+            <button type="submit" class="btn btn-success mt-3">
+                {{ form.instance.pk|yesno:'Сохранить изменения,Создать продукт' }}
+            </button>
             <a href="{% url 'catalog:catalog' %}" class="btn btn-secondary mt-3">Назад к списку</a>
         </form>
         <a href="{% url 'catalog:product_list' %}" class="btn btn-secondary">Отмена</a>

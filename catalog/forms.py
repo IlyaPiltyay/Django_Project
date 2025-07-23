@@ -9,7 +9,7 @@ class ProductForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ['name', 'description', 'price', 'category', 'image']
+        fields = ['name', 'description', 'price', 'category', 'image', 'is_published']
 
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
@@ -43,3 +43,9 @@ class ProductForm(forms.ModelForm):
         if price is not None and price <= 0:
             raise ValidationError("Цена не может быть отрицательной.")
         return price
+
+
+# class ProductModeratorForm(forms.ModelForm):
+#     class Meta:
+#         model = Product
+#         exclude = ('can_unpublish_product',)
