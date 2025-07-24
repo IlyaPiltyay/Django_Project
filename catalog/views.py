@@ -1,11 +1,16 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
+from django.views.decorators.cache import cache_page
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   TemplateView, UpdateView)
 from catalog.forms import ProductForm
 from catalog.models import Product, Category
 from django.contrib import messages
+from django.utils.decorators import method_decorator
+from django.core.cache import cache
+
+from catalog.services import get_products_by_category
 
 
 # Create your views here.
@@ -33,8 +38,27 @@ class ProductListView(ListView):
     context_object_name = 'products'
 
     def get_queryset(self):
-        category_id = self.kwargs.get('category_id')  # Получаем category_id из URL
-        return Product.objects.filter(category_id=category_id, is_published=True)  # Фильтруем продукты по категории
+        # Получаем category_id из параметров URL
+        category_id = self.kwargs.get('category_id')
+
+        # Формируем ключ кэша для списка продуктов в определённой категории
+        cache_key = f'product_queryset_category_{category_id}'
+
+        # Пытаемся получить закешированный queryset
+        queryset = cache.get(cache_key)
+
+        if queryset is None:  # Если нет закешированного значения
+            queryset = get_products_by_category(category_id)
+            cache.set(cache_key, queryset, 60 * 15)  # Кешируем queryset на 15 минут
+
+        return queryset
+
+    @staticmethod
+    def clear_category_cache(category_id):
+        """ Очищает кэш для данной категории. """
+        cache_key = f'product_queryset_category_{category_id}'
+        cache.delete(cache_key)
+        print(f"Кэш для категории {category_id} очищен.")
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
@@ -93,7 +117,13 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
         messages.success(request, f'Продукт "{self.get_object().name}" был успешно удалён.')
         return super().delete(request, *args, **kwargs)
 
+    def get_success_url(self):
+        category_id = self.object.category.id  # Получаем id категории для кэша
+        ProductListView.clear_category_cache(category_id)
+        return super().get_success_url()
 
+
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = 'catalog/product_detail.html'
