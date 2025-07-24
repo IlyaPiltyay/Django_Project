@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Skystore{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .small-img {
+            width: 210px; /* Фиксированная ширина */
+            height: 230px; /* Фиксированная высота */
+            object-fit: cover; /* Сохранение пропорций */
+        }
+    </style>
+</head>
+<body>
+<!-- Шапка -->
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Skystore</h5>
+    {% include 'catalog/menu.html' %}
+</div>
+
+<!-- Блок для отображения сообщений -->
+<div class="container">
+    {% if messages %}
+    <div class="my-3">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Основное содержимое -->
+    <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <span class="nav-link">{{ user.email }}!</span>  <!-- Отображение имени пользователя -->
+        </li>
+        <li class="nav-item">
+            <form method="post" action="{% url 'users:logout' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-link nav-link">Выйти</button>
+            </form>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:register' %}">Регистрация</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:login' %}">Вход</a>
+        </li>
+        {% endif %}
+    </ul>
+    {% block content %}{% endblock %}
+</div>
+
+<!-- Подвал -->
+<footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <div class="row">
+        <div class="col-12 col-md">
+            SkyStore
+            <small class="d-block mb-3 text-muted">&copy; 2023</small>
+        </div>
+        <div class="col-6 col-md">
+            <h5>Категории</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">Рассылки</a></li>
+                <li><a class="text-muted" href="#">Телеграм боты</a></li>
+                <li><a class="text-muted" href="#">Полезные утилиты</a></li>
+                <li><a class="text-muted" href="#">Веб-приложения</a></li>
+                <li><a class="text-muted" href="#">Микросервисы</a></li>
+            </ul>
+        </div>
+        <div class="col-6 col-md">
+            <h5>Дополнительно</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="{% url 'blog:blogpost_list' %}">Мы пишем</a></li>
+            </ul>
+        </div>
+        <div class="col-6 col-md">
+            <h5>О нас</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="{% url 'catalog:contacts' %}">Контакты</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

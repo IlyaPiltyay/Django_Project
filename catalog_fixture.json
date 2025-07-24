@@ -1,0 +1,96 @@
+[
+{
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+        "name": "Iphone",
+        "description": "техника",
+        "image": "media/iphone-16-pro-max-desert-titanium-4-1000x1000.jpg",
+        "category": 4,
+        "price": "12.00",
+        "created_at": "2025-06-16T13:47:08.497Z",
+        "updated_at": "2025-06-23T17:03:04.159Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 9,
+    "fields": {
+        "name": "Samsung",
+        "description": "Смартфон",
+        "image": "media/кыпвмыо-800x800.png",
+        "category": 4,
+        "price": "20.00",
+        "created_at": "2025-06-23T12:06:09.326Z",
+        "updated_at": "2025-06-23T17:02:52.930Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 10,
+    "fields": {
+        "name": "Honor",
+        "description": "Смартфон",
+        "image": "media/6917406211-_1_.png",
+        "category": 4,
+        "price": "10.00",
+        "created_at": "2025-06-23T17:04:19.442Z",
+        "updated_at": "2025-06-23T17:05:11.285Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 11,
+    "fields": {
+        "name": "Nissan",
+        "description": "Авто Nissan 350Z",
+        "image": "media/456x342_nissan.webp",
+        "category": 5,
+        "price": "1000.00",
+        "created_at": "2025-06-23T17:14:17.430Z",
+        "updated_at": "2025-06-23T17:14:17.430Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 12,
+    "fields": {
+        "name": "Toyota",
+        "description": "Toyota Supra",
+        "image": "media/supra.jpg",
+        "category": 5,
+        "price": "5000.00",
+        "created_at": "2025-06-23T17:15:26.783Z",
+        "updated_at": "2025-06-23T17:15:26.783Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 13,
+    "fields": {
+        "name": "Suzuki",
+        "description": "suzuki moto",
+        "image": "",
+        "category": 5,
+        "price": "33366.00",
+        "created_at": "2025-06-23T17:16:34.108Z",
+        "updated_at": "2025-06-23T17:16:34.108Z"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+        "name": "Телефон",
+        "description": "Смартфоны"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+        "name": "Авто",
+        "description": "Автомобили,Мотоциклы"
+    }
+}
+]
